@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Box,
   Button,
@@ -8,15 +8,21 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthenticated } from './selectors';
+import { actions } from './reducer';
+
+const { setIsAuthenticated } = actions;
 
 export const Login = () => {
-  const [loggedin, setLoggedIn] = React.useState(false);
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(getAuthenticated);
 
   const handleSignin = () => {
-    setLoggedIn(true);
+    dispatch(setIsAuthenticated(true));
   };
 
-  if (loggedin) return <></>;
+  if (isAuthenticated) return <></>;
 
   return (
     <Paper elevation={3}>
